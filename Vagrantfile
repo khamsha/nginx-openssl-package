@@ -29,7 +29,7 @@ Vagrant.configure("2") do |config|
     # With rpm -i command rpmbuild directory has been installed in root home directory. This is an issue # 2 to solve
     # Installing all required dependencies
     yum-builddep -y /root/rpmbuild/SPECS/nginx.spec
-    # Changing spec file to include openssl option, rebuilding rpm package and installing it
+    # Changing spec file to include openssl option, rebuilding rpm package and installing it. Pay attention paths aren't relative
     sed -i 's#--with-debug#--with-openssl=/home/vagrant/openssl-OpenSSL_1_1_1s#' /root/rpmbuild/SPECS/nginx.spec
     rpmbuild -bb /root/rpmbuild/SPECS/nginx.spec
     yum localinstall -y /root/rpmbuild/RPMS/x86_64/nginx-1.20.2-1.el8.ngx.x86_64.rpm
@@ -48,7 +48,7 @@ Vagrant.configure("2") do |config|
     nginx -s reload
 
     # Adding repo /etc/yum.repos.d and testing package installation
-    cat << EOF > /etc/yum.repos.d/otus.repo
+    cat <<-EOF > /etc/yum.repos.d/otus.repo
     [otus]
     name=otus-linux
     baseurl=http://localhost/repo
