@@ -49,12 +49,12 @@ Vagrant.configure("2") do |config|
 
     # Adding repo /etc/yum.repos.d and testing package installation
     cat <<-EOF > /etc/yum.repos.d/otus.repo
-    [otus]
-    name=otus-linux
-    baseurl=http://localhost/repo
-    gpgcheck=0
-    enabled=1
-    EOF
+[otus]
+name=otus-linux
+baseurl=http://localhost/repo
+gpgcheck=0
+enabled=1
+EOF
     yum install percona-orchestrator.x86_64 -y
   SHELL
 end
